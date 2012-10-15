@@ -1,0 +1,234 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Tax Records App</title>
+		<meta name="description" content="">
+		<meta name="author" content="iamshanedoyle">
+		<link rel="stylesheet" href="css/bootstrap.min.css"/>
+	</head>
+	<body style="padding: 30px;">
+		
+	<div class="container">
+		<div class="row">
+			<div class="span3">
+				<ul class="nav nav-list well">
+					<li><a href="#start"><i class="icon-home"></i> Home</a></li>
+					<legend>Personal Records</legend>
+					<li><a data-bind="page-href: 'createPerson'"><i class="icon-plus-sign"></i> Create Person</a></li>
+					<li><a href="#viewPersons"><i class="icon-list"></i> View Persons</a></li>
+					<li class="nav-header">Search Personal Records</li>
+					<div class="input-append">
+						<input class="input-medium" type="text" placeholder="Enter Name">
+						<button class="btn" type="button"><i class="icon-search"></i></button>
+					</div>
+					<legend>Vehicle Records</legend>
+					<li><a data-bind="page-href: 'createVehicle'"><i class="icon-plus-sign"></i> Create Vehicle</a></li>
+					<li><a href="#viewVehicles"><i class="icon-list"></i> View Vehicles</a></li>
+					<li class="nav-header">Search Vehicle Records</li>
+					<div class="input-append">
+						<input class="input-medium" type="text" placeholder="Enter Vehicle Reg">
+						<button class="btn" type="button"><i class="icon-search"></i></button>
+					</div>
+				</ul>
+			</div>
+			<div class="span9">
+				
+				<!-- Home -->
+				<div class="well" data-bind="page: {id: 'start', title: 'Car Tax Application'}">
+					<h3>Home</h3>
+				</div>
+				
+				<!-- Create Person -->
+				<div data-bind="page: {id: 'createPerson', modal: true}" class="modal span5 hide">
+					<div class="modal-header">
+						<a data-bind="page-href: '../'" class="close" data-dismiss="modal" aria-hidden="true">×</a>
+						<h3>Create Person</h3>
+					</div>
+					<div class="modal-body">
+						<form class="form-horizontal">
+							<div class="control-group">
+								<label class="control-label" for="firstName">First Name</label>
+								<div class="controls">
+									<input type="text" id="firstName" placeholder="First Name"/>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="lastName">Last Name</label>
+								<div class="controls">
+									<input type="text" id="lastName" placeholder="Last Name"/>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="ppsNumber">PPS Number</label>
+								<div class="controls">
+									<input type="text" id="ppsNumber" placeholder="PPS Number"/>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="dateOfBirth">Date of Birth</label>
+								<div class="controls">
+									<input type="text" id="dateOfBirth" placeholder=""/>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="street">Street</label>
+								<div class="controls">
+									<input type="text" id="street" placeholder="Street"/>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="town">Town</label>
+								<div class="controls">
+									<input type="text" id="town" placeholder="Town"/>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="county">County</label>
+								<div class="controls">
+									<select id="county" data-bind="options: counties"></select>
+								</div>
+							</div>
+						</form>	
+						
+					</div>
+					<div class="modal-footer">
+						<a data-bind="page-href: '../'" class="btn">Cancel</a>
+						<a data-bind="page-href: '../'" class="btn">Create</a>
+					</div>
+				</div>
+				
+				<!-- View Persons -->
+				<div class="well" data-bind="page: {id: 'viewPersons'}">
+					<h3>Personal Records</h3>
+					
+					<form class="form-inline">
+						<input type="text" class="input" placeholder="Enter Name"/>
+						<input type="text" class="input" placeholder="Enter PPS Number"/>
+						<button type="submit" class="btn"><i class="icon-search"></i> Search</button>
+						<a data-bind="page-href: 'createPerson'" role="button" class="btn pull-right"><i class="icon-plus-sign"></i> Create Person</a>
+					</form>
+					
+					<table class="table table-bordered table-hover">
+						
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>D.O.B</th>
+								<th>PPS Number</th>
+								<th>Address</th>
+								<th></th>
+							</tr>
+						</thead>
+						
+						<tbody data-bind="foreach: persons">
+							<tr>
+								<td data-bind="text: fullName"></td>
+								<td data-bind="text: dateOfBirth"></td>
+								<td data-bind="text: ppsNumber"></td>
+								<td data-bind="text: address.fullAddress"></td>
+								<td><a href="#" title="Delete Person" data-bind="click: $root.removePersonalRecord"><i class="icon-remove-circle"></i></a></td>
+							</tr>
+						</tbody>
+						
+					</table>
+					
+				</div>
+				
+				<!-- Create Vehicle -->
+				<div data-bind="page: {id: 'createVehicle', modal: true}" class="modal hide" >
+					<div class="modal-header">
+						<a data-bind="page-href: '../'" class="close" data-dismiss="modal" aria-hidden="true">×</a>
+						<h3>Create Vehicle</h3>
+					</div>
+					<div class="modal-body">
+						<form class="form-horizontal">
+							<div class="control-group">
+								<label class="control-label" for="registration">Registration</label>
+								<div class="controls">
+									<input type="text" id="registration" placeholder="Registration"/>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="make">Make</label>
+								<div class="controls">
+									<input type="text" id="make" placeholder="Make"/>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="model">Model</label>
+								<div class="controls">
+									<input type="text" id="model" placeholder="Model"/>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="engineSize">Engine Size</label>
+								<div class="controls">
+									<select id="engineSize" data-bind="options: ko.utils.range(1.0, 4.0)"></select>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="owner">Owner</label>
+								<div class="controls">
+									<select id="owner" data-bind="options: persons, optionsText: 'fullName'"></select>
+								</div>
+							</div>
+						</form>	
+						
+					</div>
+					<div class="modal-footer">
+						<a data-bind="page-href: '../'" class="btn">Cancel</a>
+						<a data-bind="page-href: '../'" class="btn">Create</a>
+					</div>
+				</div>
+				
+				<!-- View Vehicles -->
+				<div class="well" data-bind="page: {id: 'viewVehicles'}">
+					<h3>Vehicle Records</h3>
+					
+					<form class="form-inline">
+						<input type="text" class="input" placeholder="Enter Registration"/>
+						<button type="submit" class="btn"><i class="icon-search"></i> Search</button>
+						<a data-bind="page-href: 'createVehicle'" role="button" class="btn pull-right"><i class="icon-plus-sign"></i> Create Vehicle</a>
+					</form>
+					
+					<table class="table table-bordered table-hover">
+						
+						<thead>
+							<tr>
+								<th>Registration</th>
+								<th>Make & Model</th>
+								<th>Engine Size</th>
+								<th>Year</th>
+								<th></th>
+							</tr>
+						</thead>
+						
+						<tbody data-bind="foreach: vehicles">
+							<tr>
+								<td data-bind="text: registration"></td>
+								<td data-bind="text: makeAndModel"></td>
+								<td data-bind="text: engineSize"></td>
+								<td data-bind="text: year"></td>
+								<td><a href="#" title="Delete Vehicle" data-bind="click: $root.removeVehicleRecord"><i class="icon-remove-circle"></i></a></td>
+							</tr>
+						</tbody>
+						
+					</table>
+					
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	
+	
+	<script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+	<script type="text/javascript" src="js/underscore-min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/knockout-2.1.0.js"></script>
+	<script type="text/javascript" src="js/pager.min.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+
+	</body>
+</html>
