@@ -121,7 +121,7 @@
 							</tr>
 						</thead>
 						
-						<tbody data-bind="foreach: persons">
+						<tbody data-bind="foreach: personsPagedList">
 							<tr>
 								<td data-bind="text: fullName"></td>
 								<td data-bind="text: dateOfBirth"></td>
@@ -132,7 +132,14 @@
 						</tbody>
 						
 					</table>
-					
+					<div class="pagination">
+						<ul>
+							<li data-bind="css: { disabled: personsPageIndex() === 0 }"><a id="first" title="First Page" href="#" data-bind="click: firstPersonsPage">First</a></li>
+							<li data-bind="css: { disabled: personsPageIndex() === 0 }"><a id="prev" title="Previous Page" href="#" data-bind="click: previousPersonsPage">Prev</a></li>
+							<li data-bind="css: { disabled: personsPageIndex() === maxPersonsPageIndex() }"><a id="next" title="Next Page" href="#" data-bind="click: nextPersonsPage">Next</a></li>
+							<li data-bind="css: { disabled: personsPageIndex() === maxPersonsPageIndex() }"><a id="last" title="Last Page" href="#" data-bind="click: lastPersonsPage">Last</a></li>
+						</ul>
+					</div>
 				</div>
 				
 				<!-- Create Vehicle -->
@@ -204,7 +211,7 @@
 							</tr>
 						</thead>
 						
-						<tbody data-bind="foreach: vehicles">
+						<tbody data-bind="foreach: vehiclesPagedList">
 							<tr>
 								<td data-bind="text: registration"></td>
 								<td data-bind="text: makeAndModel"></td>
@@ -215,6 +222,15 @@
 						</tbody>
 						
 					</table>
+					<div class="pagination">
+						<ul>
+							<li data-bind="css: { disabled: vehiclesPageIndex() === 0 }"><a id="first" title="First Page" href="#" data-bind="click: firstVehiclesPage">First</a></li>
+							<li data-bind="css: { disabled: vehiclesPageIndex() === 0 }"><a id="prev" title="Previous Page" href="#" data-bind="click: previousVehiclesPage">Prev</a></li>
+							<li data-bind="css: { disabled: vehiclesPageIndex() === maxVehiclesPageIndex() }"><a id="next" title="Next Page" href="#" data-bind="click: nextVehiclesPage">Next</a></li>
+							<li data-bind="css: { disabled: vehiclesPageIndex() === maxVehiclesPageIndex() }"><a id="last" title="Last Page" href="#" data-bind="click: lastVehiclesPage">Last</a></li>
+						</ul>
+					</div>
+					
 					
 				</div>
 				
